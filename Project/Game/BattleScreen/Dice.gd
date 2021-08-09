@@ -2,6 +2,9 @@ extends TextureRect
 
 var data = {}
 
+func _ready():
+	texture = null
+
 func display_dice(dice):
 	data.value = dice.value
 	data.icon = dice.icon

@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=2]
+[gd_scene load_steps=21 format=2]
 
 [ext_resource path="res://Project/Game/BattleScreen/BattleManager.gd" type="Script" id=1]
 [ext_resource path="res://Project/MainManager.gd" type="Script" id=2]
@@ -15,13 +15,16 @@
 [ext_resource path="res://Assets/Aseprite/Dice/Dice_02.png" type="Texture" id=13]
 [ext_resource path="res://Project/Game/BattleScreen/Dice.gd" type="Script" id=14]
 [ext_resource path="res://Project/Game/BattleScreen/Skill.gd" type="Script" id=15]
+[ext_resource path="res://Project/Game/BattleScreen/SevenMultiplier.gd" type="Script" id=16]
+[ext_resource path="res://Project/Game/BattleScreen/HUD/SkillsDisplay.gd" type="Script" id=17]
+[ext_resource path="res://Project/Game/BattleScreen/HUD/HealthBarsDisplay.gd" type="Script" id=18]
 
 [sub_resource type="DynamicFont" id=1]
 size = 8
 font_data = ExtResource( 6 )
 
 [sub_resource type="DynamicFont" id=2]
-size = 6
+size = 8
 font_data = ExtResource( 6 )
 
 [node name="Main" type="Node2D"]
@@ -33,7 +36,10 @@ script = ExtResource( 2 )
 script = ExtResource( 1 )
 dice_controller = NodePath("DiceController")
 roll_button = NodePath("HUD/Buttons/HBoxContainer/RollButton")
+fight_button = NodePath("HUD/Buttons/HBoxContainer/FightTurnButton")
 dices_display = NodePath("HUD/DicesDisplay")
+seven_multiplier = NodePath("HUD/SkillsDisplay/SevenMultiplier")
+healthbar_display = NodePath("HUD/HealthBarsDisplay")
 
 [node name="DiceController" type="Node2D" parent="Game/BattleScreen"]
 script = ExtResource( 3 )
@@ -80,13 +86,13 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="EndTurnButton" type="Button" parent="Game/BattleScreen/HUD/Buttons/HBoxContainer"]
+[node name="FightTurnButton" type="Button" parent="Game/BattleScreen/HUD/Buttons/HBoxContainer"]
 margin_left = 72.0
-margin_right = 108.0
+margin_right = 109.0
 margin_bottom = 16.0
 rect_min_size = Vector2( 24, 16 )
 custom_fonts/font = SubResource( 2 )
-text = "End Turn"
+text = "Fight"
 __meta__ = {
 "_edit_use_anchors_": false,
 "_editor_description_": ""
@@ -143,6 +149,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 margin_top = 72.0
 margin_bottom = -27.0
+script = ExtResource( 17 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -224,18 +231,36 @@ margin_bottom = 32.0
 rect_min_size = Vector2( 16, 16 )
 texture = ExtResource( 8 )
 
-[node name="Seven" type="TextureRect" parent="Game/BattleScreen/HUD/SkillsDisplay"]
+[node name="SevenMultiplier" type="VBoxContainer" parent="Game/BattleScreen/HUD/SkillsDisplay"]
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-margin_left = -20.0
+margin_left = -8.0
 margin_top = -18.0
-margin_right = 20.0
+margin_right = 8.0
 margin_bottom = 18.0
-rect_min_size = Vector2( 40, 0 )
+rect_min_size = Vector2( 16, 32 )
+script = ExtResource( 16 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+amount_label = NodePath("SevenLabel")
+
+[node name="SevenLabel" type="Label" parent="Game/BattleScreen/HUD/SkillsDisplay/SevenMultiplier"]
+margin_right = 16.0
+margin_bottom = 16.0
+custom_fonts/font = ExtResource( 10 )
+text = "0"
+align = 1
+valign = 1
+
+[node name="SevenIcon" type="TextureRect" parent="Game/BattleScreen/HUD/SkillsDisplay/SevenMultiplier"]
+margin_top = 20.0
+margin_right = 16.0
+margin_bottom = 36.0
+rect_min_size = Vector2( 16, 16 )
 texture = ExtResource( 7 )
-stretch_mode = 4
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -249,25 +274,25 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="HealthSkillContainer" type="VBoxContainer" parent="Game/BattleScreen/HUD/SkillsDisplay/EnemySkills"]
+[node name="AttackSkillContainer3" type="VBoxContainer" parent="Game/BattleScreen/HUD/SkillsDisplay/EnemySkills"]
 margin_right = 16.0
 margin_bottom = 36.0
 rect_min_size = Vector2( 16, 32 )
 custom_constants/separation = 0
 
-[node name="HealthLabel" type="Label" parent="Game/BattleScreen/HUD/SkillsDisplay/EnemySkills/HealthSkillContainer"]
+[node name="AttackLabel" type="Label" parent="Game/BattleScreen/HUD/SkillsDisplay/EnemySkills/AttackSkillContainer3"]
 margin_right = 16.0
 margin_bottom = 16.0
 custom_fonts/font = ExtResource( 10 )
 text = "0"
 align = 1
 
-[node name="HealthIcon" type="TextureRect" parent="Game/BattleScreen/HUD/SkillsDisplay/EnemySkills/HealthSkillContainer"]
+[node name="AttackIcon" type="TextureRect" parent="Game/BattleScreen/HUD/SkillsDisplay/EnemySkills/AttackSkillContainer3"]
 margin_top = 16.0
 margin_right = 16.0
 margin_bottom = 32.0
 rect_min_size = Vector2( 16, 16 )
-texture = ExtResource( 5 )
+texture = ExtResource( 8 )
 
 [node name="BlockSkillContainer2" type="VBoxContainer" parent="Game/BattleScreen/HUD/SkillsDisplay/EnemySkills"]
 margin_left = 20.0
@@ -290,35 +315,38 @@ margin_bottom = 32.0
 rect_min_size = Vector2( 16, 16 )
 texture = ExtResource( 9 )
 
-[node name="AttackSkillContainer3" type="VBoxContainer" parent="Game/BattleScreen/HUD/SkillsDisplay/EnemySkills"]
+[node name="HealthSkillContainer" type="VBoxContainer" parent="Game/BattleScreen/HUD/SkillsDisplay/EnemySkills"]
 margin_left = 40.0
 margin_right = 56.0
 margin_bottom = 36.0
 rect_min_size = Vector2( 16, 32 )
 custom_constants/separation = 0
 
-[node name="AttackLabel" type="Label" parent="Game/BattleScreen/HUD/SkillsDisplay/EnemySkills/AttackSkillContainer3"]
+[node name="HealthLabel" type="Label" parent="Game/BattleScreen/HUD/SkillsDisplay/EnemySkills/HealthSkillContainer"]
 margin_right = 16.0
 margin_bottom = 16.0
 custom_fonts/font = ExtResource( 10 )
 text = "0"
 align = 1
 
-[node name="AttackIcon" type="TextureRect" parent="Game/BattleScreen/HUD/SkillsDisplay/EnemySkills/AttackSkillContainer3"]
+[node name="HealthIcon" type="TextureRect" parent="Game/BattleScreen/HUD/SkillsDisplay/EnemySkills/HealthSkillContainer"]
 margin_top = 16.0
 margin_right = 16.0
 margin_bottom = 32.0
 rect_min_size = Vector2( 16, 16 )
-texture = ExtResource( 8 )
+texture = ExtResource( 5 )
 
 [node name="HealthBarsDisplay" type="Control" parent="Game/BattleScreen/HUD"]
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_top = 120.0
 mouse_filter = 2
+script = ExtResource( 18 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
+player_health_label = NodePath("PlayerHealthLabel")
+enemy_health_label = NodePath("EnemyHealthLabel")
 
 [node name="PlayerHealthLabel" type="Label" parent="Game/BattleScreen/HUD/HealthBarsDisplay"]
 anchor_top = 1.0
@@ -326,12 +354,12 @@ anchor_bottom = 1.0
 margin_top = -14.0
 margin_right = 40.0
 custom_fonts/font = ExtResource( 10 )
-text = "30"
+text = "0"
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="EnemyHealthLabel2" type="Label" parent="Game/BattleScreen/HUD/HealthBarsDisplay"]
+[node name="EnemyHealthLabel" type="Label" parent="Game/BattleScreen/HUD/HealthBarsDisplay"]
 anchor_left = 1.0
 anchor_top = 1.0
 anchor_right = 1.0
@@ -339,4 +367,4 @@ anchor_bottom = 1.0
 margin_left = -40.0
 margin_top = -14.0
 custom_fonts/font = ExtResource( 10 )
-text = "15"
+text = "0"

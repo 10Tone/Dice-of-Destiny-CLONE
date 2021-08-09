@@ -14,14 +14,14 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://Project/Resources/DiceResource.gd"
 }, {
-"base": "Reference",
-"class": "SkillTypes",
+"base": "Resource",
+"class": "EntityBaseResource",
 "language": "GDScript",
-"path": "res://Project/Game/BattleScreen/SkillTypes.gd"
+"path": "res://Project/Resources/EntityBaseResource.gd"
 } ]
 _global_script_class_icons={
 "DiceResource": "",
-"SkillTypes": ""
+"EntityBaseResource": ""
 }
 
 [application]
