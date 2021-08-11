@@ -62,20 +62,31 @@ func start_player_turn():
 	start_enemy_turn()
 
 func start_enemy_turn():
+	rolled_dices.clear()
+	_dices_display.clear_dices()
 	_enemy.take_health(_player.attack_skill)
 	_player.clear_skill_values()
 	_seven_multiplier.clear_seven_multiplier()
-	print("enemy turn started")
+	
+	yield(get_tree(), "idle_frame")
+	roll_enemy_dice()
+	
 
 func on_roll_button_down():
 	if player_rolled_dices:
 		return
 	if _dice_controller:
-		rolled_dices = _dice_controller.roll_dices(3)
+		rolled_dices = _dice_controller.roll_dices(_player.dice_amount)
 		if _dices_display:
 			_dices_display.display_dice_roll(rolled_dices)
 		player_rolled_dices = true
 		_roll_button.disabled = true
+
+func roll_enemy_dice():
+	if _dice_controller:
+		rolled_dices = _dice_controller.roll_dices(_enemy.dice_amount)
+		if _dices_display:
+			_dices_display.display_dice_roll(rolled_dices)
 
 func on_value_added_to_skill(_node, _value, _skill_type, _entity_type):
 	match _entity_type:

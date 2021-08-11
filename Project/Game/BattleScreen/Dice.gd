@@ -18,3 +18,8 @@ func get_drag_data(_position):
 	texture = null
 
 	return data
+
+func clear_dice():
+	texture = null
+	data = {}
+

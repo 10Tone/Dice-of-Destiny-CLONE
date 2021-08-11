@@ -18,10 +18,28 @@ _global_script_classes=[ {
 "class": "EntityBaseResource",
 "language": "GDScript",
 "path": "res://Project/Resources/EntityBaseResource.gd"
+}, {
+"base": "Resource",
+"class": "Event",
+"language": "GDScript",
+"path": "res://Project/Resources/GlobalEventResource.gd"
+}, {
+"base": "Node",
+"class": "Events",
+"language": "GDScript",
+"path": "res://Project/Globals/GlobalEvents.gd"
+}, {
+"base": "Node",
+"class": "Settings",
+"language": "GDScript",
+"path": "res://Project/Globals/GlobalSettings.gd"
 } ]
 _global_script_class_icons={
 "DiceResource": "",
-"EntityBaseResource": ""
+"EntityBaseResource": "",
+"Event": "",
+"Events": "",
+"Settings": ""
 }
 
 [application]
@@ -29,6 +47,15 @@ _global_script_class_icons={
 config/name="Dice of Destiny CLONE"
 run/main_scene="res://Project/Main.tscn"
 config/icon="res://icon.png"
+
+[autoload]
+
+GlobalSettings="*res://Project/Globals/GlobalSettings.gd"
+GlobalEvents="*res://Project/Globals/GlobalEvents.gd"
+
+[debug]
+
+gdscript/warnings/unused_signal=false
 
 [display]
 

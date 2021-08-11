@@ -1,0 +1,213 @@
+[gd_scene load_steps=9 format=2]
+
+[ext_resource path="res://Assets/Fonts/PerfectDOS.tres" type="DynamicFont" id=1]
+[ext_resource path="res://Assets/Aseprite/Attack_Icon.png" type="Texture" id=2]
+[ext_resource path="res://Assets/Aseprite/Block_Icon.png" type="Texture" id=3]
+[ext_resource path="res://Assets/Aseprite/Health_Icon.png" type="Texture" id=4]
+[ext_resource path="res://Assets/Aseprite/Seven_Icon_TEMP.png" type="Texture" id=5]
+[ext_resource path="res://Project/Game/BattleScreen/Skill.gd" type="Script" id=6]
+[ext_resource path="res://Project/Game/BattleScreen/SevenMultiplier.gd" type="Script" id=7]
+[ext_resource path="res://Project/Game/BattleScreen/HUD/SkillsDisplay.gd" type="Script" id=8]
+
+[node name="SkillsDisplay" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_top = 72.0
+margin_bottom = -27.0
+script = ExtResource( 8 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="PlayerSkills" type="HBoxContainer" parent="."]
+anchor_bottom = 1.0
+margin_right = 56.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="HealthSkillContainer" type="VBoxContainer" parent="PlayerSkills"]
+margin_right = 16.0
+margin_bottom = 36.0
+rect_min_size = Vector2( 16, 32 )
+custom_constants/separation = 0
+script = ExtResource( 6 )
+amount_label = NodePath("HealthLabel")
+
+[node name="HealthLabel" type="Label" parent="PlayerSkills/HealthSkillContainer"]
+margin_right = 16.0
+margin_bottom = 16.0
+custom_fonts/font = ExtResource( 1 )
+text = "0"
+align = 1
+
+[node name="HealthIcon" type="TextureRect" parent="PlayerSkills/HealthSkillContainer"]
+margin_top = 16.0
+margin_right = 16.0
+margin_bottom = 32.0
+rect_min_size = Vector2( 16, 16 )
+texture = ExtResource( 4 )
+
+[node name="BlockSkillContainer2" type="VBoxContainer" parent="PlayerSkills"]
+margin_left = 20.0
+margin_right = 36.0
+margin_bottom = 36.0
+rect_min_size = Vector2( 16, 32 )
+custom_constants/separation = 0
+script = ExtResource( 6 )
+skill_type = 1
+amount_label = NodePath("BlockLabel")
+
+[node name="BlockLabel" type="Label" parent="PlayerSkills/BlockSkillContainer2"]
+margin_right = 16.0
+margin_bottom = 16.0
+custom_fonts/font = ExtResource( 1 )
+text = "0"
+align = 1
+
+[node name="BlockIcon" type="TextureRect" parent="PlayerSkills/BlockSkillContainer2"]
+margin_top = 16.0
+margin_right = 16.0
+margin_bottom = 32.0
+rect_min_size = Vector2( 16, 16 )
+texture = ExtResource( 3 )
+
+[node name="AttackSkillContainer3" type="VBoxContainer" parent="PlayerSkills"]
+margin_left = 40.0
+margin_right = 56.0
+margin_bottom = 36.0
+rect_min_size = Vector2( 16, 32 )
+custom_constants/separation = 0
+script = ExtResource( 6 )
+skill_type = 2
+amount_label = NodePath("AttackLabel")
+
+[node name="AttackLabel" type="Label" parent="PlayerSkills/AttackSkillContainer3"]
+margin_right = 16.0
+margin_bottom = 16.0
+custom_fonts/font = ExtResource( 1 )
+text = "0"
+align = 1
+
+[node name="AttackIcon" type="TextureRect" parent="PlayerSkills/AttackSkillContainer3"]
+margin_top = 16.0
+margin_right = 16.0
+margin_bottom = 32.0
+rect_min_size = Vector2( 16, 16 )
+texture = ExtResource( 2 )
+
+[node name="SevenMultiplier" type="VBoxContainer" parent="."]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -8.0
+margin_top = -18.0
+margin_right = 8.0
+margin_bottom = 18.0
+rect_min_size = Vector2( 16, 32 )
+script = ExtResource( 7 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+amount_label = NodePath("SevenLabel")
+
+[node name="SevenLabel" type="Label" parent="SevenMultiplier"]
+margin_right = 16.0
+margin_bottom = 16.0
+custom_fonts/font = ExtResource( 1 )
+text = "0"
+align = 1
+valign = 1
+
+[node name="SevenIcon" type="TextureRect" parent="SevenMultiplier"]
+margin_top = 20.0
+margin_right = 16.0
+margin_bottom = 36.0
+rect_min_size = Vector2( 16, 16 )
+texture = ExtResource( 5 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="EnemySkills" type="HBoxContainer" parent="."]
+anchor_left = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = -56.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="AttackSkillContainer3" type="VBoxContainer" parent="EnemySkills"]
+margin_right = 16.0
+margin_bottom = 36.0
+rect_min_size = Vector2( 16, 32 )
+custom_constants/separation = 0
+script = ExtResource( 6 )
+skill_type = 2
+entity_type = 1
+amount_label = NodePath("AttackLabel")
+
+[node name="AttackLabel" type="Label" parent="EnemySkills/AttackSkillContainer3"]
+margin_right = 16.0
+margin_bottom = 16.0
+custom_fonts/font = ExtResource( 1 )
+text = "0"
+align = 1
+
+[node name="AttackIcon" type="TextureRect" parent="EnemySkills/AttackSkillContainer3"]
+margin_top = 16.0
+margin_right = 16.0
+margin_bottom = 32.0
+rect_min_size = Vector2( 16, 16 )
+texture = ExtResource( 2 )
+
+[node name="BlockSkillContainer2" type="VBoxContainer" parent="EnemySkills"]
+margin_left = 20.0
+margin_right = 36.0
+margin_bottom = 36.0
+rect_min_size = Vector2( 16, 32 )
+custom_constants/separation = 0
+script = ExtResource( 6 )
+skill_type = 1
+entity_type = 1
+amount_label = NodePath("BlockLabel")
+
+[node name="BlockLabel" type="Label" parent="EnemySkills/BlockSkillContainer2"]
+margin_right = 16.0
+margin_bottom = 16.0
+custom_fonts/font = ExtResource( 1 )
+text = "0"
+align = 1
+
+[node name="BlockIcon" type="TextureRect" parent="EnemySkills/BlockSkillContainer2"]
+margin_top = 16.0
+margin_right = 16.0
+margin_bottom = 32.0
+rect_min_size = Vector2( 16, 16 )
+texture = ExtResource( 3 )
+
+[node name="HealthSkillContainer" type="VBoxContainer" parent="EnemySkills"]
+margin_left = 40.0
+margin_right = 56.0
+margin_bottom = 36.0
+rect_min_size = Vector2( 16, 32 )
+custom_constants/separation = 0
+script = ExtResource( 6 )
+entity_type = 1
+amount_label = NodePath("HealthLabel")
+
+[node name="HealthLabel" type="Label" parent="EnemySkills/HealthSkillContainer"]
+margin_right = 16.0
+margin_bottom = 16.0
+custom_fonts/font = ExtResource( 1 )
+text = "0"
+align = 1
+
+[node name="HealthIcon" type="TextureRect" parent="EnemySkills/HealthSkillContainer"]
+margin_top = 16.0
+margin_right = 16.0
+margin_bottom = 32.0
+rect_min_size = Vector2( 16, 16 )
+texture = ExtResource( 4 )

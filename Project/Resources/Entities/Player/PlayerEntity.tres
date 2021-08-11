@@ -6,3 +6,4 @@
 script = ExtResource( 1 )
 entity_type = 0
 start_health = 25
+dice_amount = 3

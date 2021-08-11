@@ -6,6 +6,7 @@ enum SkillTypes {HEALTH, BLOCK, ATTACK}
 
 export(EntityTypes) var entity_type
 export(int) var start_health
+export(int) var dice_amount
 var health
 var activate_multiplier = false setget set_activate_multiplier
 var health_skill:int = 0 setget set_health_skill
