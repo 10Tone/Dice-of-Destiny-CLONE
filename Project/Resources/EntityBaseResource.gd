@@ -46,7 +46,7 @@ func set_health_skill(amount):
 		else:
 			health_skill += amount
 	skill_values[SkillTypes.HEALTH] = health_skill
-	emit_signal("entity_skill_values_changed",EntityTypes.PLAYER, skill_values)
+	emit_signal("entity_skill_values_changed",entity_type, skill_values)
 
 func set_block_skill(amount):
 	if activate_multiplier:
@@ -58,7 +58,7 @@ func set_block_skill(amount):
 		else:
 			block_skill += amount
 	skill_values[SkillTypes.BLOCK] = block_skill
-	emit_signal("entity_skill_values_changed",EntityTypes.PLAYER, skill_values)
+	emit_signal("entity_skill_values_changed",entity_type, skill_values)
 
 func set_attack_skill(amount):
 	if activate_multiplier:
@@ -70,7 +70,7 @@ func set_attack_skill(amount):
 		else:
 			attack_skill += amount
 	skill_values[SkillTypes.ATTACK] = attack_skill
-	emit_signal("entity_skill_values_changed",EntityTypes.PLAYER, skill_values)
+	emit_signal("entity_skill_values_changed",entity_type, skill_values)
 
 func set_activate_multiplier(_activate_multiplier):
 	activate_multiplier = _activate_multiplier

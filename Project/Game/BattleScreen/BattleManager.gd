@@ -5,12 +5,14 @@ enum SkillTypes {HEALTH, BLOCK, ATTACK}
 enum EntityTypes {PLAYER, ENEMY}
 
 export var dice_controller = NodePath()
+export var enemy_turn_simulator = NodePath()
 export var roll_button = NodePath()
 export var fight_button = NodePath()
 export var dices_display = NodePath()
 export var seven_multiplier = NodePath()
 export var healthbar_display = NodePath()
 onready var _dice_controller = get_node(dice_controller)
+onready var _enemy_turn_simulator = get_node(enemy_turn_simulator)
 onready var _roll_button = get_node(roll_button)
 onready var _fight_button = get_node(fight_button)
 onready var _dices_display = get_node(dices_display)
@@ -43,11 +45,15 @@ func _ready():
 		_player.set_start_health()
 		_enemy.set_start_health()
 
-	skills = get_tree().get_nodes_in_group("entity")
+	skills = get_tree().get_nodes_in_group("skills")
 	for skill in skills:
 		skill.connect("value_added_to_skill", self, "on_value_added_to_skill")
-		_player.connect("entity_skill_values_changed", skill, "on_entity_skill_values_changed")
-		_player.connect("skill_values_cleared", skill, "on_skill_values_cleared")
+		if skill.entity_type == EntityTypes.PLAYER:
+			_player.connect("entity_skill_values_changed", skill, "on_entity_skill_values_changed")
+			_player.connect("skill_values_cleared", skill, "on_skill_values_cleared")
+		elif skill.entity_type == EntityTypes.ENEMY:
+			_enemy.connect("entity_skill_values_changed", skill, "on_entity_skill_values_changed")
+			_enemy.connect("skill_values_cleared", skill, "on_skill_values_cleared")
 
 	start_player_turn()
 
@@ -70,7 +76,9 @@ func start_enemy_turn():
 	
 	yield(get_tree(), "idle_frame")
 	roll_enemy_dice()
-	
+
+	var dice_display = _dices_display.get_child(0).get_child(0)
+	_enemy_turn_simulator.move_dice_to_skill(dice_display.texture, dices_display.rect_global_position, Vector2(100,100))
 
 func on_roll_button_down():
 	if player_rolled_dices:
@@ -99,7 +107,13 @@ func on_value_added_to_skill(_node, _value, _skill_type, _entity_type):
 				SkillTypes.ATTACK:
 					_player.attack_skill = _value
 		EntityTypes.ENEMY:
-			pass
+			match _skill_type:
+				SkillTypes.HEALTH:
+					_enemy.health_skill = _value
+				SkillTypes.BLOCK:
+					_enemy.block_skill = _value
+				SkillTypes.ATTACK:
+					_enemy.attack_skill = _value
 
 func check_seven_multiplier():
 	yield(_seven_multiplier, "skill_muliplier_activated")

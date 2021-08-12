@@ -1,7 +1,8 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://Project/Game/BattleScreen/DiceController.tscn" type="PackedScene" id=2]
 [ext_resource path="res://Project/Game/BattleScreen/BattleManager.gd" type="Script" id=3]
+[ext_resource path="res://Project/Game/BattleScreen/EnemyTurnSimulator.tscn" type="PackedScene" id=4]
 [ext_resource path="res://Project/Game/BattleScreen/HUD/Buttons.tscn" type="PackedScene" id=6]
 [ext_resource path="res://Project/Game/BattleScreen/HUD/SkillsDisplay.tscn" type="PackedScene" id=7]
 [ext_resource path="res://Project/Game/BattleScreen/HUD/HealthBarsDisplay.tscn" type="PackedScene" id=8]
@@ -10,11 +11,14 @@
 [node name="BattleScreen" type="Node2D"]
 script = ExtResource( 3 )
 dice_controller = NodePath("DiceController")
+enemy_turn_simulator = NodePath("EnemyTurnSimulator")
 roll_button = NodePath("HUD/Buttons/HBoxContainer/RollButton")
 fight_button = NodePath("HUD/Buttons/HBoxContainer/FightTurnButton")
 dices_display = NodePath("HUD/DicesDisplay")
 seven_multiplier = NodePath("HUD/SkillsDisplay/SevenMultiplier")
 healthbar_display = NodePath("HUD/HealthBarsDisplay")
+
+[node name="EnemyTurnSimulator" parent="." instance=ExtResource( 4 )]
 
 [node name="DiceController" parent="." instance=ExtResource( 2 )]
 
@@ -27,3 +31,6 @@ healthbar_display = NodePath("HUD/HealthBarsDisplay")
 [node name="SkillsDisplay" parent="HUD" instance=ExtResource( 7 )]
 
 [node name="HealthBarsDisplay" parent="HUD" instance=ExtResource( 8 )]
+
+[editable path="HUD/DicesDisplay"]
+[editable path="HUD/SkillsDisplay"]

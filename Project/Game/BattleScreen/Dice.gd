@@ -14,7 +14,7 @@ func get_drag_data(_position):
 	var drag_preview = TextureRect.new()
 	drag_preview.texture = texture
 	set_drag_preview(drag_preview)
-
+	print("getting drag data")
 	texture = null
 
 	return data

@@ -13,7 +13,7 @@ var total_value = 0
 signal value_added_to_skill(value, skill)
 
 func _init():
-	add_to_group("entity")
+	add_to_group("skills")
 
 func can_drop_data(_position, data):
 	return data is Dictionary and data.has("value")
