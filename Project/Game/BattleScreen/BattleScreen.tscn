@@ -1,5 +1,6 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=9 format=2]
 
+[ext_resource path="res://Assets/Aseprite/Design/Battle Screen/Battle Screen bgrnd.png" type="Texture" id=1]
 [ext_resource path="res://Project/Game/BattleScreen/DiceController.tscn" type="PackedScene" id=2]
 [ext_resource path="res://Project/Game/BattleScreen/BattleManager.gd" type="Script" id=3]
 [ext_resource path="res://Project/Game/BattleScreen/EnemyTurnSimulator.tscn" type="PackedScene" id=4]
@@ -17,20 +18,51 @@ fight_button = NodePath("HUD/Buttons/HBoxContainer/FightTurnButton")
 dices_display = NodePath("HUD/DicesDisplay")
 seven_multiplier = NodePath("HUD/SkillsDisplay/SevenMultiplier")
 healthbar_display = NodePath("HUD/HealthBarsDisplay")
+skills_display = NodePath("HUD/SkillsDisplay")
 
 [node name="EnemyTurnSimulator" parent="." instance=ExtResource( 4 )]
 
 [node name="DiceController" parent="." instance=ExtResource( 2 )]
 
+[node name="Sprite" type="Sprite" parent="."]
+texture = ExtResource( 1 )
+centered = false
+
+[node name="CPUParticles2D" type="CPUParticles2D" parent="."]
+position = Vector2( 113.745, 2.15425 )
+rotation = 1.5708
+amount = 50
+lifetime = 5.0
+preprocess = 174.19
+emission_shape = 2
+emission_rect_extents = Vector2( 0, 140 )
+spread = 0.0
+gravity = Vector2( 0, 0 )
+initial_velocity = 40.0
+initial_velocity_random = 0.56
+color = Color( 0.443137, 0.537255, 0.752941, 0.670588 )
+
 [node name="HUD" type="CanvasLayer" parent="."]
 
+[node name="TextureRect" type="TextureRect" parent="HUD"]
+visible = false
+anchor_right = 1.0
+anchor_bottom = 1.0
+texture = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
 [node name="Buttons" parent="HUD" instance=ExtResource( 6 )]
+visible = false
 
 [node name="DicesDisplay" parent="HUD" instance=ExtResource( 9 )]
+visible = false
 
 [node name="SkillsDisplay" parent="HUD" instance=ExtResource( 7 )]
+visible = false
 
 [node name="HealthBarsDisplay" parent="HUD" instance=ExtResource( 8 )]
+visible = false
 
-[editable path="HUD/DicesDisplay"]
 [editable path="HUD/SkillsDisplay"]

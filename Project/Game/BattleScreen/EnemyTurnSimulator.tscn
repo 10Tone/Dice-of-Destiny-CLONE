@@ -1,6 +1,5 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=2 format=2]
 
-[ext_resource path="res://Assets/Aseprite/Dice/Dice_01.png" type="Texture" id=1]
 [ext_resource path="res://Project/Game/BattleScreen/EnemyTurnSimulator.gd" type="Script" id=2]
 
 [node name="EnemyTurnSimulator" type="Node2D"]
@@ -9,7 +8,7 @@ icon_sprite = NodePath("IconSprite")
 sprite_tween = NodePath("SpriteTween")
 
 [node name="IconSprite" type="Sprite" parent="."]
-texture = ExtResource( 1 )
+centered = false
 
 [node name="SpriteTween" type="Tween" parent="."]
 

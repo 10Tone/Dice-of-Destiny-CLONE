@@ -11,6 +11,7 @@ export var fight_button = NodePath()
 export var dices_display = NodePath()
 export var seven_multiplier = NodePath()
 export var healthbar_display = NodePath()
+export var skills_display = NodePath()
 onready var _dice_controller = get_node(dice_controller)
 onready var _enemy_turn_simulator = get_node(enemy_turn_simulator)
 onready var _roll_button = get_node(roll_button)
@@ -18,6 +19,7 @@ onready var _fight_button = get_node(fight_button)
 onready var _dices_display = get_node(dices_display)
 onready var _seven_multiplier = get_node(seven_multiplier)
 onready var _healthbar_display = get_node(healthbar_display)
+onready var _skills_display =get_node(skills_display)
 
 onready var _player = load("res://Project/Resources/Entities/Player/PlayerEntity.tres")
 onready var _enemy = load("res://Project/Resources/Entities/Enemies/EnemyEntity.tres")
@@ -58,27 +60,53 @@ func _ready():
 	start_player_turn()
 
 func start_player_turn():
+	player_rolled_dices = false
 	_roll_button.disabled = false
 	_player.clear_skill_values()
 
 	check_seven_multiplier()
 
 	yield(_fight_button, "button_down")
-
+	_player.add_health(_player.health_skill)
 	start_enemy_turn()
 
 func start_enemy_turn():
+	# 1. clear dices
 	rolled_dices.clear()
 	_dices_display.clear_dices()
-	_enemy.take_health(_player.attack_skill)
-	_player.clear_skill_values()
+	#TODO 2. take health enemy & check enemy health <= 0
+	_enemy.take_health(_player.attack_skill) #TODO animate
+	# 3. clear player skills
+	_player.clear_skill_values() #TODO keep block
+	# 4. clear multiplier
 	_seven_multiplier.clear_seven_multiplier()
 	
 	yield(get_tree(), "idle_frame")
+	# 5. roll enemy dices
 	roll_enemy_dice()
-
+	#TODO 6. enemy value multiplier
+	#TODO 7. choose skills and move dice values to skills: loop through dices
 	var dice_display = _dices_display.get_child(0).get_child(0)
-	_enemy_turn_simulator.move_dice_to_skill(dice_display.texture, dices_display.rect_global_position, Vector2(100,100))
+	var start_pos = dice_display.rect_global_position
+	var target_pos = _skills_display.enemy_skill_icon_positions[SkillTypes.ATTACK]
+	_enemy_turn_simulator.move_dice_to_skill(dice_display.texture, start_pos, target_pos)
+	dice_display.texture = null
+
+	yield(_enemy_turn_simulator, "icon_tween_completed")
+	_enemy.attack_skill = rolled_dices[0].value
+
+	yield(get_tree(), "idle_frame")
+	#TODO 8. use enemy skills: player health - (enemy attack - player block) a/o + enemy block + enemy health
+	_player.take_health(_enemy.attack_skill - _player.block_skill)
+	yield(get_tree(), "idle_frame")
+	#TODO 9. check if player health > 0
+
+	#10. start player turn if 
+	rolled_dices.clear()
+	_dices_display.clear_dices()
+	start_player_turn()
+	_enemy.clear_skill_values()
+
 
 func on_roll_button_down():
 	if player_rolled_dices:
@@ -116,5 +144,5 @@ func on_value_added_to_skill(_node, _value, _skill_type, _entity_type):
 					_enemy.attack_skill = _value
 
 func check_seven_multiplier():
-	yield(_seven_multiplier, "skill_muliplier_activated")
+	yield(_seven_multiplier, "skill_multiplier_activated")
 	_player.activate_multiplier = true

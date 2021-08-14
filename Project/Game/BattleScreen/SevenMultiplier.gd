@@ -6,7 +6,7 @@ onready var _amount_label = get_node(amount_label)
 var total_value = 0
 var activated = false
 
-signal skill_muliplier_activated
+signal skill_multiplier_activated
 
 func can_drop_data(_position, data):
 	return data is Dictionary and data.has("value")
@@ -17,7 +17,7 @@ func drop_data(_position, data):
 
 	if total_value == 7 and !activated:
 		activated = true
-		emit_signal("skill_muliplier_activated")
+		emit_signal("skill_multiplier_activated")
 
 func clear_seven_multiplier():
 	activated = false

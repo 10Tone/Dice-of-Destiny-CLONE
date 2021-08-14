@@ -18,6 +18,9 @@ script = ExtResource( 8 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
+enemy_attack_skill_icon = NodePath("EnemySkills/AttackSkillContainer3/AttackIcon")
+enemy_block_skill_icon = NodePath("EnemySkills/BlockSkillContainer2/BlockIcon")
+enemy_health_skill_icon = NodePath("EnemySkills/HealthSkillContainer/HealthIcon")
 
 [node name="PlayerSkills" type="HBoxContainer" parent="."]
 anchor_bottom = 1.0

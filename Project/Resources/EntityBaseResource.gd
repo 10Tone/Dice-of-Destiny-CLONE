@@ -30,6 +30,9 @@ func add_health(amount):
 	emit_signal("entity_health_value_changed", entity_type ,health)
 
 func take_health(amount):
+	print(amount)
+	if amount < 0:
+		return
 	health -= amount
 	if health < 0:
 		health = 0
@@ -82,6 +85,9 @@ func clear_skill_values():
 	health_skill = 0
 	block_skill = 0
 	attack_skill = 0
+	skill_values[SkillTypes.HEALTH] = 0
+	skill_values[SkillTypes.BLOCK] = 0
+	skill_values[SkillTypes.ATTACK] = 0
 	activate_multiplier = false
 	emit_signal("skill_values_cleared")
 

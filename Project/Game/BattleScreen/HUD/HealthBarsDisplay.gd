@@ -13,7 +13,7 @@ func on_entity_health_value_changed(entity_type, value):
         EntityTypes.PLAYER:
             if _player_health_label:
                 _player_health_label.text = str(value)
-                print("health changed")
+                # print("health changed")
         EntityTypes.ENEMY:
             if _enemy_health_label:
                 _enemy_health_label.text = str(value)
