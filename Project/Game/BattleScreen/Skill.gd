@@ -21,6 +21,7 @@ func can_drop_data(_position, data):
 func drop_data(_position, data):
 	# total_value += data.value
 	# _amount_label.text = str(total_value)
+	data.data_dropped = true
 	emit_signal("value_added_to_skill", self, data.value, skill_type, entity_type)
 
 func on_entity_skill_values_changed(entity, skill_values):

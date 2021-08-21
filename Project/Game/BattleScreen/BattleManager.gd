@@ -8,18 +8,22 @@ export var dice_controller = NodePath()
 export var enemy_turn_simulator = NodePath()
 export var roll_button = NodePath()
 export var fight_button = NodePath()
+export var undo_button = NodePath()
 export var dices_display = NodePath()
 export var seven_multiplier = NodePath()
 export var healthbar_display = NodePath()
 export var skills_display = NodePath()
+export var win_loose_popup = NodePath()
 onready var _dice_controller = get_node(dice_controller)
 onready var _enemy_turn_simulator = get_node(enemy_turn_simulator)
 onready var _roll_button = get_node(roll_button)
 onready var _fight_button = get_node(fight_button)
+onready var _undo_button = get_node(undo_button)
 onready var _dices_display = get_node(dices_display)
 onready var _seven_multiplier = get_node(seven_multiplier)
 onready var _healthbar_display = get_node(healthbar_display)
 onready var _skills_display =get_node(skills_display)
+onready var _win_loose_popup = get_node(win_loose_popup)
 
 onready var _player = load("res://Project/Resources/Entities/Player/PlayerEntity.tres")
 onready var _enemy = load("res://Project/Resources/Entities/Enemies/EnemyEntity.tres")
@@ -37,6 +41,9 @@ func _ready():
 
 	if _roll_button:
 		_roll_button.connect("button_down", self, "on_roll_button_down")
+		
+	if _undo_button:
+		_undo_button.connect("button_down", self, "on_undo_button_down")
 
 	if !_fight_button:
 		print_debug("fight button not connected")
@@ -62,22 +69,28 @@ func _ready():
 func start_player_turn():
 	player_rolled_dices = false
 	_roll_button.disabled = false
+	_fight_button.disabled = false
 	_player.clear_skill_values()
 
 	check_seven_multiplier()
 
 	yield(_fight_button, "button_down")
 	_player.add_health(_player.health_skill)
+	
 	start_enemy_turn()
 
 func start_enemy_turn():
+	_fight_button.disabled = true
 	# 1. clear dices
 	rolled_dices.clear()
 	_dices_display.clear_dices()
 	#TODO 2. take health enemy & check enemy health <= 0
 	_enemy.take_health(_player.attack_skill) #TODO animate
+	if _enemy.health <= 0:
+		_win_loose_popup.show_popup(true)
+		return
 	# 3. clear player skills
-	_player.clear_skill_values() #TODO keep block
+#	_player.clear_skill_values() #TODO keep block
 	# 4. clear multiplier
 	_seven_multiplier.clear_seven_multiplier()
 	
@@ -94,10 +107,16 @@ func start_enemy_turn():
 
 	yield(_enemy_turn_simulator, "icon_tween_completed")
 	_enemy.attack_skill = rolled_dices[0].value
+	#TODO implement multiple skills
 
 	yield(get_tree(), "idle_frame")
 	#TODO 8. use enemy skills: player health - (enemy attack - player block) a/o + enemy block + enemy health
-	_player.take_health(_enemy.attack_skill - _player.block_skill)
+	_player.take_health(_enemy.attack_skill)
+	
+	if _player.health <= 0:
+		_win_loose_popup.show_popup(false)
+		return
+		
 	yield(get_tree(), "idle_frame")
 	#TODO 9. check if player health > 0
 
@@ -117,6 +136,14 @@ func on_roll_button_down():
 			_dices_display.display_dice_roll(rolled_dices)
 		player_rolled_dices = true
 		_roll_button.disabled = true
+
+func on_undo_button_down():
+	if !player_rolled_dices:
+		return
+	_player.clear_skill_values()
+	if _dices_display:
+		_dices_display.display_dice_roll(rolled_dices)
+	
 
 func roll_enemy_dice():
 	if _dice_controller:

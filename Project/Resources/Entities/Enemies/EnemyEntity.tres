@@ -5,5 +5,5 @@
 [resource]
 script = ExtResource( 1 )
 entity_type = 1
-start_health = 15
+start_health = 35
 dice_amount = 1

@@ -1,13 +1,17 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=11 format=2]
 
 [ext_resource path="res://Assets/Aseprite/Design/Battle Screen/Battle Screen bgrnd.png" type="Texture" id=1]
 [ext_resource path="res://Project/Game/BattleScreen/DiceController.tscn" type="PackedScene" id=2]
 [ext_resource path="res://Project/Game/BattleScreen/BattleManager.gd" type="Script" id=3]
 [ext_resource path="res://Project/Game/BattleScreen/EnemyTurnSimulator.tscn" type="PackedScene" id=4]
+[ext_resource path="res://Project/Game/BattleScreen/HUD/WinLoosePopup.tscn" type="PackedScene" id=5]
 [ext_resource path="res://Project/Game/BattleScreen/HUD/Buttons.tscn" type="PackedScene" id=6]
 [ext_resource path="res://Project/Game/BattleScreen/HUD/SkillsDisplay.tscn" type="PackedScene" id=7]
 [ext_resource path="res://Project/Game/BattleScreen/HUD/HealthBarsDisplay.tscn" type="PackedScene" id=8]
 [ext_resource path="res://Project/Game/BattleScreen/HUD/DicesDisplay.tscn" type="PackedScene" id=9]
+
+[sub_resource type="Gradient" id=1]
+colors = PoolColorArray( 0, 0, 0, 1, 0.792969, 0.815613, 1, 1 )
 
 [node name="BattleScreen" type="Node2D"]
 script = ExtResource( 3 )
@@ -15,10 +19,12 @@ dice_controller = NodePath("DiceController")
 enemy_turn_simulator = NodePath("EnemyTurnSimulator")
 roll_button = NodePath("HUD/Buttons/HBoxContainer/RollButton")
 fight_button = NodePath("HUD/Buttons/HBoxContainer/FightTurnButton")
+undo_button = NodePath("HUD/Buttons/HBoxContainer/Undo Button")
 dices_display = NodePath("HUD/DicesDisplay")
 seven_multiplier = NodePath("HUD/SkillsDisplay/SevenMultiplier")
 healthbar_display = NodePath("HUD/HealthBarsDisplay")
 skills_display = NodePath("HUD/SkillsDisplay")
+win_loose_popup = NodePath("HUD/WinLoosePopup")
 
 [node name="EnemyTurnSimulator" parent="." instance=ExtResource( 4 )]
 
@@ -29,40 +35,39 @@ texture = ExtResource( 1 )
 centered = false
 
 [node name="CPUParticles2D" type="CPUParticles2D" parent="."]
-position = Vector2( 113.745, 2.15425 )
+visible = false
+position = Vector2( 113.745, 62.8085 )
 rotation = 1.5708
-amount = 50
-lifetime = 5.0
-preprocess = 174.19
+amount = 100
+preprocess = 120.0
 emission_shape = 2
-emission_rect_extents = Vector2( 0, 140 )
+emission_rect_extents = Vector2( 50, 50 )
 spread = 0.0
 gravity = Vector2( 0, 0 )
-initial_velocity = 40.0
-initial_velocity_random = 0.56
-color = Color( 0.443137, 0.537255, 0.752941, 0.670588 )
+radial_accel = 300.0
+color_ramp = SubResource( 1 )
 
 [node name="HUD" type="CanvasLayer" parent="."]
 
-[node name="TextureRect" type="TextureRect" parent="HUD"]
-visible = false
-anchor_right = 1.0
-anchor_bottom = 1.0
-texture = ExtResource( 1 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
 [node name="Buttons" parent="HUD" instance=ExtResource( 6 )]
-visible = false
+margin_bottom = -250.0
 
 [node name="DicesDisplay" parent="HUD" instance=ExtResource( 9 )]
-visible = false
 
 [node name="SkillsDisplay" parent="HUD" instance=ExtResource( 7 )]
-visible = false
+margin_top = 181.0
+margin_bottom = -53.0
 
 [node name="HealthBarsDisplay" parent="HUD" instance=ExtResource( 8 )]
-visible = false
+margin_top = 249.0
 
+[node name="WinLoosePopup" parent="HUD" instance=ExtResource( 5 )]
+visible = false
+margin_left = -120.0
+margin_top = -80.0
+margin_right = 120.0
+margin_bottom = 80.0
+rect_min_size = Vector2( 240, 160 )
+
+[editable path="HUD/Buttons"]
 [editable path="HUD/SkillsDisplay"]
