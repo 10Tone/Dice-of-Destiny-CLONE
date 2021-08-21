@@ -27,11 +27,17 @@ margin_bottom = 10.0
 value = 50.0
 texture_under = ExtResource( 2 )
 texture_progress = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="TextureRect" type="TextureRect" parent="."]
 margin_right = 140.0
 margin_bottom = 20.0
 texture = ExtResource( 3 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="Label" type="Label" parent="."]
 anchor_top = 0.5
