@@ -3,6 +3,7 @@ class_name EntityBaseResource
 
 enum EntityTypes {PLAYER, ENEMY}
 enum SkillTypes {HEALTH, BLOCK, ATTACK}
+enum EntityStates {IDLE, SHIELD_UP, ATTACK, HIT}
 
 export(EntityTypes) var entity_type
 export(int) var start_health
@@ -71,7 +72,7 @@ func set_block_skill(amount):
 			block_skill += amount
 	skill_values[SkillTypes.BLOCK] = block_skill
 	emit_signal("entity_skill_values_changed",entity_type, skill_values)
-	
+	GlobalEvents.emit_signal("entity_state_changed", entity_type, EntityStates.SHIELD_UP)
 	
 func get_block_skill():
 	return block_skill

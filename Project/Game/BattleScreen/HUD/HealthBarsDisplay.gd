@@ -23,4 +23,7 @@ func on_entity_health_value_changed(entity_type, value):
 		EntityTypes.ENEMY:
 			if _enemy_health_label:
 				_enemy_health_label.text = str(value)
+				
+			if _enemy_progress_bar:
+				_enemy_progress_bar.value = value
 	
