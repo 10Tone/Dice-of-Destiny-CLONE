@@ -12,17 +12,18 @@ func _ready():
 	dices.append(load("res://Project/Resources/Dice/Dice_05.tres"))
 	dices.append(load("res://Project/Resources/Dice/Dice_06.tres"))
 
-func roll_dices(dice_amount):
+func roll_dices(dice_amount: int) -> Array:
 	if dice_amount > 3:
 		print_debug("maximum of three dices")
-		return
+		return []
 
 	var throw = []
 	for _i in range(dice_amount):
 		throw.append( get_dice(rng.randi_range(1, 6)))
 	return throw
 
-func get_dice(value):
+#get the dice resource
+func get_dice(value: int) -> Array:
 	match value:
 		1: 
 			return dices[0]
@@ -36,3 +37,4 @@ func get_dice(value):
 			return dices[4]
 		6: 
 			return dices[5]
+	return []

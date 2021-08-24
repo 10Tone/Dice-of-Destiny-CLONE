@@ -8,8 +8,9 @@ enum EntityStates {IDLE, SHIELD_UP, ATTACK, HIT}
 export(EntityTypes) var entity_type
 export(int) var start_health
 export(int) var dice_amount
-var health
-var activate_multiplier = false setget set_activate_multiplier
+
+var health: int
+var activate_multiplier: bool = false setget set_activate_multiplier
 var health_skill:int = 0 setget set_health_skill, get_health_skill
 var block_skill:int = 0 setget set_block_skill, get_block_skill
 var attack_skill:int = 0 setget set_attack_skill, get_attack_skill
@@ -20,19 +21,19 @@ signal entity_skill_values_changed
 signal skill_values_cleared
 signal entity_health_value_changed
 
-func set_start_health():
+func set_start_health() -> void:
 	health = start_health
 	emit_signal("entity_health_value_changed", entity_type, health)
 
 
-func add_health(amount):
+func add_health(amount: int) -> void:
 	health += amount
 	if health > start_health:
 		health = start_health
 	emit_signal("entity_health_value_changed", entity_type ,health)
 	
 	
-func take_health(amount):
+func take_health(amount: int) -> void:
 	amount -= self.block_skill
 	if amount < 0:
 		return
@@ -42,7 +43,7 @@ func take_health(amount):
 	emit_signal("entity_health_value_changed", entity_type, health)
 
 
-func set_health_skill(amount):
+func set_health_skill(amount: int) -> void:
 	if activate_multiplier:
 		health_skill += amount
 		health_skill *= 2
@@ -55,13 +56,13 @@ func set_health_skill(amount):
 	emit_signal("entity_skill_values_changed",entity_type, skill_values)
 	
 	
-func get_health_skill():
+func get_health_skill() -> int:
 	var return_health_skill = health_skill
 	health_skill = 0
 	return return_health_skill
 
 
-func set_block_skill(amount):
+func set_block_skill(amount: int) -> void:
 	if activate_multiplier:
 		block_skill += amount
 		block_skill *= 2
@@ -74,11 +75,11 @@ func set_block_skill(amount):
 	emit_signal("entity_skill_values_changed",entity_type, skill_values)
 	GlobalEvents.emit_signal("entity_state_changed", entity_type, EntityStates.SHIELD_UP)
 	
-func get_block_skill():
+func get_block_skill() -> int:
 	return block_skill
 
 
-func set_attack_skill(amount):
+func set_attack_skill(amount: int) -> void:
 	if activate_multiplier:
 		attack_skill += amount
 		attack_skill *= 2
@@ -91,18 +92,18 @@ func set_attack_skill(amount):
 	emit_signal("entity_skill_values_changed",entity_type, skill_values)
 	
 	
-func get_attack_skill():
+func get_attack_skill() -> int:
 	return attack_skill
 
 
-func set_activate_multiplier(_activate_multiplier):
+func set_activate_multiplier(_activate_multiplier: bool) -> void:
 	activate_multiplier = _activate_multiplier
 	set_health_skill(0)
 	set_block_skill(0)
 	set_attack_skill(0)
 
 
-func clear_skill_values():
+func clear_skill_values() -> void:
 	health_skill = 0
 	block_skill = 0
 	attack_skill = 0

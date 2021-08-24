@@ -5,7 +5,7 @@ var data = null
 func _ready():
 	texture = null
 
-func display_dice(dice):
+func display_dice(dice: DiceResource) -> void:
 	data = {}
 	data.value = dice.value
 	data.icon = dice.icon
@@ -13,7 +13,7 @@ func display_dice(dice):
 	texture = data.icon
 	# print(data.value)
 
-func get_drag_data(_position):
+func get_drag_data(_position: Vector2) -> Dictionary:
 	var parent_preview = Control.new()
 	var drag_preview = TextureRect.new()
 	drag_preview.texture = texture
@@ -26,12 +26,12 @@ func get_drag_data(_position):
 
 	return data
 
-func clear_dice():
+func clear_dice() -> void:
 	texture = null
 	data = null
 
-func _unhandled_input(event):
-	if event.is_action_released("ui_left_mouse_button"):
-		if data is Dictionary:
-			if data.icon and !data.data_dropped:
-				texture = data.icon
+func _unhandled_input(event: InputEvent) -> void:
+	if event.is_action_released("ui_left_mouse_button") and data is Dictionary:
+		if data.icon and !data.data_dropped:
+			texture = data.icon
+

@@ -8,7 +8,7 @@ func _ready():
 	var _err = GlobalEvents.connect("reload_button_pressed", self, "on_reload_button_pressed")
 	load_battle_screen()
 
-func load_battle_screen():
+func load_battle_screen() -> void:
 	battle_screen = BattleScreen.instance()
 	add_child(battle_screen)
 

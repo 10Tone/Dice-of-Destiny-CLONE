@@ -7,10 +7,10 @@ export(SkillTypes) var skill_type
 export(EntityTypes) var entity_type 
 export var amount_label = NodePath()
 export var skill_stats_icon_controller = NodePath()
-onready var _amount_label = get_node(amount_label)
+onready var _amount_label: Label = get_node(amount_label)
 onready var _skill_stats_icon_controller = get_node(skill_stats_icon_controller)
 
-var total_value = 0
+var total_value: int = 0
 
 signal value_added_to_skill(value, skill)
 
