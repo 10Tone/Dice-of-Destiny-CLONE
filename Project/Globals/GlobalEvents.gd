@@ -3,3 +3,4 @@ class_name Events
 
 signal reload_button_pressed
 signal entity_state_changed(entity_type, entity_state)
+signal entity_battle_action_values_changed(entity_type, battle_action_values)
