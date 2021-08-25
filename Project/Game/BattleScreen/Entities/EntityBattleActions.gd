@@ -4,7 +4,7 @@ extends Node
 enum BattleActions {HEALING, BLOCKING, ATTACKING}
 enum EntityTypes {PLAYER, ENEMY}
 
-export(EntityTypes) var entity_type
+var entity_type
 
 var activate_multiplier: bool = false setget set_activate_multiplier
 var healing:int = 0 setget set_healing, get_healing
@@ -62,7 +62,7 @@ func set_attacking(amount: int) -> void:
 		else:
 			attacking += amount
 	battle_action_values[BattleActions.ATTACKING] = attacking
-	GlobalEvents.emit_signal("entity_skill_values_changed",entity_type, battle_action_values)
+	GlobalEvents.emit_signal("entity_battle_action_values_changed",entity_type, battle_action_values)
 	
 	
 func get_attacking() -> int:
@@ -71,15 +71,15 @@ func get_attacking() -> int:
 
 func set_activate_multiplier(_activate_multiplier: bool) -> void:
 	activate_multiplier = _activate_multiplier
-	set_healing(0)
-	set_blocking(0)
-	set_attacking(0)
+	self.healing = 0
+	self.blocking = 0
+	self.attacking = 0
 
 
 func clear_battle_action_values() -> void:
-	healing = 0
-	blocking = 0
-	attacking = 0
+	self.healing = 0
+	self.blocking = 0
+	self.attacking = 0
 #	battle_action_values[BattleActions.HEALING] = 0
 #	battle_action_values[BattleActions.BLOCKING] = 0
 #	battle_action_values[BattleActions.ATTACKING] = 0

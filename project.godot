@@ -14,7 +14,7 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://Project/Resources/DiceResource.gd"
 }, {
-"base": "Node",
+"base": "Node2D",
 "class": "EntityBaseClass",
 "language": "GDScript",
 "path": "res://Project/Game/BattleScreen/Entities/EntityBaseClass.gd"
@@ -28,6 +28,11 @@ _global_script_classes=[ {
 "class": "EntityBattleActions",
 "language": "GDScript",
 "path": "res://Project/Game/BattleScreen/Entities/EntityBattleActions.gd"
+}, {
+"base": "Node",
+"class": "EntityHealth",
+"language": "GDScript",
+"path": "res://Project/Game/BattleScreen/Entities/EntityHealth.gd"
 }, {
 "base": "Resource",
 "class": "Event",
@@ -49,6 +54,7 @@ _global_script_class_icons={
 "EntityBaseClass": "",
 "EntityBaseResource": "",
 "EntityBattleActions": "",
+"EntityHealth": "",
 "Event": "",
 "Events": "",
 "Settings": ""
