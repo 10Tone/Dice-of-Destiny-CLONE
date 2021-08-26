@@ -9,6 +9,11 @@
 config_version=4
 
 _global_script_classes=[ {
+"base": "Node2D",
+"class": "DiceController",
+"language": "GDScript",
+"path": "res://Project/Game/BattleScreen/DiceController.gd"
+}, {
 "base": "Resource",
 "class": "DiceResource",
 "language": "GDScript",
@@ -50,6 +55,7 @@ _global_script_classes=[ {
 "path": "res://Project/Globals/GlobalSettings.gd"
 } ]
 _global_script_class_icons={
+"DiceController": "",
 "DiceResource": "",
 "EntityBaseClass": "",
 "EntityBaseResource": "",
@@ -70,6 +76,7 @@ config/icon="res://icon.png"
 
 GlobalSettings="*res://Project/Globals/GlobalSettings.gd"
 GlobalEvents="*res://Project/Globals/GlobalEvents.gd"
+GlobalEnums="*res://Project/Globals/GlobalEnums.gd"
 
 [debug]
 

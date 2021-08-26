@@ -1,4 +1,4 @@
-[gd_scene load_steps=26 format=2]
+[gd_scene load_steps=22 format=2]
 
 [ext_resource path="res://Assets/Aseprite/Design/Battle Screen/Battle Screen bgrnd.png" type="Texture" id=1]
 [ext_resource path="res://Project/Game/BattleScreen/DiceController.tscn" type="PackedScene" id=2]
@@ -13,17 +13,13 @@
 [ext_resource path="res://Assets/Aseprite/Design/Battle Screen/Ship Stats/Ship Stats Player Background.png" type="Texture" id=11]
 [ext_resource path="res://Assets/Fonts/PerfectDOS.tres" type="DynamicFont" id=12]
 [ext_resource path="res://Project/Game/BattleScreen/HUD/iconBackground.tscn" type="PackedScene" id=13]
-[ext_resource path="res://Assets/Aseprite/Design/Battle Screen/Ship Stats/Icon Shield Active.png" type="Texture" id=14]
-[ext_resource path="res://Assets/Aseprite/Design/Battle Screen/Ship Stats/Icon Shield MouseOver.png" type="Texture" id=15]
-[ext_resource path="res://Assets/Aseprite/Design/Battle Screen/Ship Stats/Icon Shield InActive.png" type="Texture" id=16]
-[ext_resource path="res://Assets/Aseprite/Design/Battle Screen/Ship Stats/Icon Attack InActive.png" type="Texture" id=17]
-[ext_resource path="res://Assets/Aseprite/Design/Battle Screen/Ship Stats/Icon Attack Active.png" type="Texture" id=18]
-[ext_resource path="res://Assets/Aseprite/Design/Battle Screen/Ship Stats/Icon Attack MouseOver.png" type="Texture" id=19]
 [ext_resource path="res://Project/Game/BattleScreen/Skill.gd" type="Script" id=20]
 [ext_resource path="res://Project/Game/BattleScreen/HUD/SkillsDisplay.gd" type="Script" id=21]
 [ext_resource path="res://Assets/Aseprite/Design/Battle Screen/Ship Stats/Ship Stats Enemy Background.png" type="Texture" id=22]
 [ext_resource path="res://Project/Game/BattleScreen/Entities/EntityAnimator.tscn" type="PackedScene" id=23]
 [ext_resource path="res://Assets/Aseprite/Entities/Antitie Background 01.png" type="Texture" id=24]
+[ext_resource path="res://Project/Game/BattleScreen/Entities/Enemy.tscn" type="PackedScene" id=25]
+[ext_resource path="res://Project/Game/BattleScreen/Entities/Player.tscn" type="PackedScene" id=26]
 
 [sub_resource type="Environment" id=1]
 background_mode = 4
@@ -178,9 +174,6 @@ valign = 1
 
 [node name="iconBackground" parent="HUD/StatsDisplay/Player Ship Stats/HBoxContainer/HealthStats/VBoxContainer" instance=ExtResource( 13 )]
 
-[node name="IconActive" parent="HUD/StatsDisplay/Player Ship Stats/HBoxContainer/HealthStats/VBoxContainer/iconBackground" index="1"]
-visible = true
-
 [node name="ShieldStats" type="Control" parent="HUD/StatsDisplay/Player Ship Stats/HBoxContainer"]
 margin_left = 73.0
 margin_right = 105.0
@@ -216,15 +209,6 @@ valign = 1
 
 [node name="iconBackground" parent="HUD/StatsDisplay/Player Ship Stats/HBoxContainer/ShieldStats/VBoxContainer" instance=ExtResource( 13 )]
 
-[node name="IconInActive" parent="HUD/StatsDisplay/Player Ship Stats/HBoxContainer/ShieldStats/VBoxContainer/iconBackground" index="0"]
-texture = ExtResource( 16 )
-
-[node name="IconActive" parent="HUD/StatsDisplay/Player Ship Stats/HBoxContainer/ShieldStats/VBoxContainer/iconBackground" index="1"]
-texture = ExtResource( 14 )
-
-[node name="IconMouseOver" parent="HUD/StatsDisplay/Player Ship Stats/HBoxContainer/ShieldStats/VBoxContainer/iconBackground" index="2"]
-texture = ExtResource( 15 )
-
 [node name="AttackStats" type="Control" parent="HUD/StatsDisplay/Player Ship Stats/HBoxContainer"]
 margin_left = 106.0
 margin_right = 138.0
@@ -259,15 +243,6 @@ align = 1
 valign = 1
 
 [node name="iconBackground" parent="HUD/StatsDisplay/Player Ship Stats/HBoxContainer/AttackStats/VBoxContainer" instance=ExtResource( 13 )]
-
-[node name="IconInActive" parent="HUD/StatsDisplay/Player Ship Stats/HBoxContainer/AttackStats/VBoxContainer/iconBackground" index="0"]
-texture = ExtResource( 17 )
-
-[node name="IconActive" parent="HUD/StatsDisplay/Player Ship Stats/HBoxContainer/AttackStats/VBoxContainer/iconBackground" index="1"]
-texture = ExtResource( 18 )
-
-[node name="IconMouseOver" parent="HUD/StatsDisplay/Player Ship Stats/HBoxContainer/AttackStats/VBoxContainer/iconBackground" index="2"]
-texture = ExtResource( 19 )
 
 [node name="TextureRect5" type="TextureRect" parent="HUD/StatsDisplay/Player Ship Stats/HBoxContainer"]
 margin_left = 139.0
@@ -348,18 +323,6 @@ align = 1
 valign = 1
 
 [node name="iconBackground" parent="HUD/StatsDisplay/Enemy Ship Stats/HBoxContainer/AttackStats/VBoxContainer" instance=ExtResource( 13 )]
-
-[node name="IconInActive" parent="HUD/StatsDisplay/Enemy Ship Stats/HBoxContainer/AttackStats/VBoxContainer/iconBackground" index="0"]
-texture = ExtResource( 17 )
-flip_h = true
-
-[node name="IconActive" parent="HUD/StatsDisplay/Enemy Ship Stats/HBoxContainer/AttackStats/VBoxContainer/iconBackground" index="1"]
-texture = ExtResource( 18 )
-flip_h = true
-
-[node name="IconMouseOver" parent="HUD/StatsDisplay/Enemy Ship Stats/HBoxContainer/AttackStats/VBoxContainer/iconBackground" index="2"]
-texture = ExtResource( 19 )
-flip_h = true
 
 [node name="ShieldStats" type="Control" parent="HUD/StatsDisplay/Enemy Ship Stats/HBoxContainer"]
 margin_left = 35.0
@@ -512,11 +475,13 @@ environment = SubResource( 1 )
 [node name="PlayerAnimator" parent="EntityAnimators" instance=ExtResource( 23 )]
 position = Vector2( 87.315, 218.417 )
 
+[node name="Entities" type="Node2D" parent="."]
+
+[node name="Player" parent="Entities" instance=ExtResource( 26 )]
+
+[node name="Enemy" parent="Entities" instance=ExtResource( 25 )]
+
 [editable path="HUD/ActionButtons"]
-[editable path="HUD/StatsDisplay/Player Ship Stats/HBoxContainer/HealthStats/VBoxContainer/iconBackground"]
-[editable path="HUD/StatsDisplay/Player Ship Stats/HBoxContainer/ShieldStats/VBoxContainer/iconBackground"]
-[editable path="HUD/StatsDisplay/Player Ship Stats/HBoxContainer/AttackStats/VBoxContainer/iconBackground"]
-[editable path="HUD/StatsDisplay/Enemy Ship Stats/HBoxContainer/AttackStats/VBoxContainer/iconBackground"]
 [editable path="HUD/HealthBars/PlayerHealthBar"]
 [editable path="HUD/HealthBars/EnemyHealthBar"]
 [editable path="EntityAnimators/PlayerAnimator"]

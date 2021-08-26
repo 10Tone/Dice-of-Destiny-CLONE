@@ -1,3 +1,4 @@
+class_name DiceController
 extends Node2D
 
 var rng = RandomNumberGenerator.new()

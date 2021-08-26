@@ -1,8 +1,7 @@
 class_name EntityBaseClass
 extends Node2D
 
-enum EntityTypes {PLAYER, ENEMY}
-export(EntityTypes) var entity_type
+export(GlobalEnums.EntityTypes) var entity_type
 
 onready var _entity_battle_actions: EntityBattleActions = EntityBattleActions.new()
 onready var _entity_health: EntityHealth = EntityHealth.new()
