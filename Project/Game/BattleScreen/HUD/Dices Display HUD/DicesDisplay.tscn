@@ -1,10 +1,10 @@
 [gd_scene load_steps=6 format=2]
 
-[ext_resource path="res://Assets/Aseprite/Dice/Dice_03.png" type="Texture" id=1]
-[ext_resource path="res://Project/Game/BattleScreen/HUD/DiceDisplay.gd" type="Script" id=2]
-[ext_resource path="res://Assets/Aseprite/Dice/Dice_02.png" type="Texture" id=3]
-[ext_resource path="res://Assets/Aseprite/Dice/Dice_01.png" type="Texture" id=4]
-[ext_resource path="res://Project/Game/BattleScreen/HUD/DicesDisplay.gd" type="Script" id=5]
+[ext_resource path="res://Assets/Aseprite/Dice/Dice_01.png" type="Texture" id=1]
+[ext_resource path="res://Project/Game/BattleScreen/HUD/Dices Display HUD/DiceDisplay.gd" type="Script" id=2]
+[ext_resource path="res://Assets/Aseprite/Dice/Dice_03.png" type="Texture" id=3]
+[ext_resource path="res://Project/Game/BattleScreen/HUD/Dices Display HUD/DicesDisplay.gd" type="Script" id=4]
+[ext_resource path="res://Assets/Aseprite/Dice/Dice_02.png" type="Texture" id=5]
 
 [node name="DicesDisplay" type="Control"]
 anchor_top = 0.5
@@ -13,7 +13,7 @@ anchor_bottom = 0.5
 margin_top = -31.5
 margin_bottom = -11.5
 rect_min_size = Vector2( 0, 20 )
-script = ExtResource( 5 )
+script = ExtResource( 4 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -35,19 +35,19 @@ __meta__ = {
 [node name="DiceDisplay_1" type="TextureRect" parent="HBoxContainer"]
 margin_right = 20.0
 margin_bottom = 20.0
-texture = ExtResource( 4 )
+texture = ExtResource( 1 )
 script = ExtResource( 2 )
 
 [node name="DiceDisplay_2" type="TextureRect" parent="HBoxContainer"]
 margin_left = 24.0
 margin_right = 44.0
 margin_bottom = 20.0
-texture = ExtResource( 3 )
+texture = ExtResource( 5 )
 script = ExtResource( 2 )
 
 [node name="DiceDisplay_3" type="TextureRect" parent="HBoxContainer"]
 margin_left = 48.0
 margin_right = 68.0
 margin_bottom = 20.0
-texture = ExtResource( 1 )
+texture = ExtResource( 3 )
 script = ExtResource( 2 )

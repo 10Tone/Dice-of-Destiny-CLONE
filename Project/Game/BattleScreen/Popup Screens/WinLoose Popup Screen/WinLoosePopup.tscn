@@ -1,7 +1,7 @@
 [gd_scene load_steps=3 format=2]
 
 [ext_resource path="res://Assets/Fonts/PerfectDOS.tres" type="DynamicFont" id=1]
-[ext_resource path="res://Project/Game/BattleScreen/HUD/WinLoosePopup.gd" type="Script" id=2]
+[ext_resource path="res://Project/Game/BattleScreen/Popup Screens/WinLoose Popup Screen/WinLoosePopup.gd" type="Script" id=2]
 
 [node name="WinLoosePopup" type="PopupDialog"]
 visible = true

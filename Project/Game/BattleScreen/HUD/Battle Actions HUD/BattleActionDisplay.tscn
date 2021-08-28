@@ -1,0 +1,44 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://Project/Game/BattleScreen/HUD/Battle Actions HUD/BattleActionDisplay.gd" type="Script" id=1]
+[ext_resource path="res://Assets/Fonts/PerfectDOS.tres" type="DynamicFont" id=2]
+[ext_resource path="res://Project/Game/BattleScreen/HUD/Battle Actions HUD/BattleActionIconController.tscn" type="PackedScene" id=5]
+
+[node name="BattleActionDisplay" type="Control"]
+margin_left = 40.0
+margin_right = 72.0
+margin_bottom = 32.0
+rect_min_size = Vector2( 32, 32 )
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+amount_label = NodePath("VBoxContainer/AmountLabel")
+battle_action_icon_controller = NodePath("VBoxContainer/BattleActionIconController")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+margin_left = -16.0
+margin_top = -64.0
+margin_right = 16.0
+rect_min_size = Vector2( 32, 64 )
+custom_constants/separation = 0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="AmountLabel" type="Label" parent="VBoxContainer"]
+margin_right = 32.0
+margin_bottom = 32.0
+rect_min_size = Vector2( 32, 32 )
+custom_fonts/font = ExtResource( 2 )
+custom_colors/font_color = Color( 1, 0.960784, 0.894118, 1 )
+align = 1
+valign = 1
+
+[node name="BattleActionIconController" parent="VBoxContainer" instance=ExtResource( 5 )]
+
+[editable path="VBoxContainer/BattleActionIconController"]

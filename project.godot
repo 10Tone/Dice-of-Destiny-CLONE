@@ -53,6 +53,11 @@ _global_script_classes=[ {
 "class": "Settings",
 "language": "GDScript",
 "path": "res://Project/Globals/GlobalSettings.gd"
+}, {
+"base": "Node",
+"class": "TurnManager",
+"language": "GDScript",
+"path": "res://Project/Game/BattleScreen/TurnManagement/TurnManager.gd"
 } ]
 _global_script_class_icons={
 "DiceController": "",
@@ -63,7 +68,8 @@ _global_script_class_icons={
 "EntityHealth": "",
 "Event": "",
 "Events": "",
-"Settings": ""
+"Settings": "",
+"TurnManager": ""
 }
 
 [application]
