@@ -11,3 +11,6 @@ signal entity_died(entity_type)
 
 #battle action display signals
 signal battle_action_display_received_dice_value(value, battle_action, entity_type)
+
+#dices rolled signal
+signal dices_rolled(dices)

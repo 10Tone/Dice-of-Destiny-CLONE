@@ -1,10 +1,12 @@
-[gd_scene load_steps=12 format=2]
+[gd_scene load_steps=14 format=2]
 
 [ext_resource path="res://Assets/Aseprite/Design/Battle Screen/Battle Screen bgrnd.png" type="Texture" id=1]
 [ext_resource path="res://Project/Game/BattleScreen/HUD/Health Bars HUD/HealthBarsDisplay.tscn" type="PackedScene" id=2]
 [ext_resource path="res://Project/Game/BattleScreen/HUD/Battle Actions HUD/BattleActionsDisplay.tscn" type="PackedScene" id=3]
 [ext_resource path="res://Project/Game/BattleScreen/BattleController.gd" type="Script" id=4]
 [ext_resource path="res://Project/Game/BattleScreen/Popup Screens/WinLoose Popup Screen/WinLoosePopup.tscn" type="PackedScene" id=5]
+[ext_resource path="res://Project/Game/BattleScreen/TurnManagement/TurnManager.tscn" type="PackedScene" id=6]
+[ext_resource path="res://Project/Game/BattleScreen/DiceController.tscn" type="PackedScene" id=7]
 [ext_resource path="res://Project/Game/BattleScreen/HUD/Dices Display HUD/DicesDisplay.tscn" type="PackedScene" id=9]
 [ext_resource path="res://Project/Game/BattleScreen/HUD/Battle Control Buttons HUD/BattleControlButtons.tscn" type="PackedScene" id=10]
 [ext_resource path="res://Project/Game/BattleScreen/Entities/EntityAnimator.tscn" type="PackedScene" id=23]
@@ -17,7 +19,7 @@ script = ExtResource( 4 )
 
 [node name="HUD" type="CanvasLayer" parent="."]
 
-[node name="ActionButtons" parent="HUD" instance=ExtResource( 10 )]
+[node name="BattleControlButtons" parent="HUD" instance=ExtResource( 10 )]
 margin_top = 6.0
 margin_bottom = 40.0
 
@@ -63,6 +65,12 @@ texture = ExtResource( 24 )
 [node name="PlayerAnimator" parent="EntityAnimators" instance=ExtResource( 23 )]
 position = Vector2( 87.315, 218.417 )
 
-[editable path="HUD/ActionButtons"]
+[node name="TurnManager" parent="." instance=ExtResource( 6 )]
+
+[node name="DiceController" parent="." instance=ExtResource( 7 )]
+
+[connection signal="button_down" from="HUD/BattleControlButtons/ActionButtonsBackground/HBoxContainer/RollButton" to="TurnManager" method="_on_RollButton_button_down"]
+
+[editable path="HUD/BattleControlButtons"]
 [editable path="HUD/HealthBarsDisplay"]
 [editable path="EntityAnimators/PlayerAnimator"]

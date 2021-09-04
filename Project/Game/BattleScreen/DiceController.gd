@@ -12,6 +12,7 @@ func _ready():
 	dices.append(load("res://Project/Resources/Dice/Dice_04.tres"))
 	dices.append(load("res://Project/Resources/Dice/Dice_05.tres"))
 	dices.append(load("res://Project/Resources/Dice/Dice_06.tres"))
+	
 
 func roll_dices(dice_amount: int) -> Array:
 	if dice_amount > 3:

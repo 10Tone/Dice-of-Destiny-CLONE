@@ -1,9 +1,14 @@
 extends Node2D
 
-onready var _dice_controller: DiceController = DiceController.new()
-onready var _turn_manager: TurnManager = TurnManager.new()
+onready var _battle_control_buttons = get_node("HUD/BattleControlButtons")
+onready var _dice_controller: DiceController = get_node("DiceController")
+onready var _turn_manager: TurnManager = get_node("TurnManager")
+
+onready var _player = get_node("Entities/Player")
+onready var _enemy = get_node("Entities/Enemy")
 
 func _ready() -> void:
+	_turn_manager.dice_controller = _dice_controller
 	start_battle()
 	
 func start_battle():
@@ -11,5 +16,5 @@ func start_battle():
 	#yield till animations finished
 	
 	#start player turn
-	_turn_manager.start_turn(GlobalEnums.EntityTypes.PLAYER)
+	_turn_manager.start_turn(_player)
 	pass
