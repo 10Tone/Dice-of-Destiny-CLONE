@@ -9,13 +9,10 @@ var blocking:int = 0 setget set_blocking, get_blocking
 var attacking:int = 0 setget set_attacking, get_attacking
 
 var battle_action_values: Dictionary = {GlobalEnums.BattleActions.HEALING: 0, GlobalEnums.BattleActions.BLOCKING: 0, GlobalEnums.BattleActions.ATTACKING: 0}
-
-func _ready() -> void:
-	GlobalEvents.connect("battle_action_display_received_dice_value", self, "on_battle_action_display_received_dice_value")
 	
-func on_battle_action_display_received_dice_value(value: int, battle_action, _entity_type):
+func _on_battle_action_display_received_dice_value(value: int, battle_action, _entity_type):
 	if _entity_type != entity_type: return
-	
+	print(value)
 	match battle_action:
 		GlobalEnums.BattleActions.HEALING:
 			self.healing = value

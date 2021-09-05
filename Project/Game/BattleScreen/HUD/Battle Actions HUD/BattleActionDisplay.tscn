@@ -36,6 +36,7 @@ margin_bottom = 32.0
 rect_min_size = Vector2( 32, 32 )
 custom_fonts/font = ExtResource( 2 )
 custom_colors/font_color = Color( 1, 0.960784, 0.894118, 1 )
+text = "0"
 align = 1
 valign = 1
 

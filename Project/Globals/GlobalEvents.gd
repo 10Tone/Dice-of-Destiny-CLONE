@@ -14,3 +14,5 @@ signal battle_action_display_received_dice_value(value, battle_action, entity_ty
 
 #dices rolled signal
 signal dices_rolled(dices)
+
+signal new_turn_started()

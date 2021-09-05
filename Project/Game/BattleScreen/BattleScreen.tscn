@@ -27,7 +27,31 @@ margin_bottom = 40.0
 
 [node name="BattleActionsDisplay" parent="HUD" instance=ExtResource( 3 )]
 
+[node name="BlockingBattleDisplay" parent="HUD/BattleActionsDisplay/PlayerBattleActions/HBoxContainer" index="2"]
+battle_action = 1
+
+[node name="AttackingBattleDisplay" parent="HUD/BattleActionsDisplay/PlayerBattleActions/HBoxContainer" index="3"]
+battle_action = 2
+
+[node name="AttackingActionDisplay" parent="HUD/BattleActionsDisplay/EnemyBattleActions/HBoxContainer" index="1"]
+battle_action = 2
+entity_type = 1
+
+[node name="BlockingActionDisplay" parent="HUD/BattleActionsDisplay/EnemyBattleActions/HBoxContainer" index="2"]
+battle_action = 1
+entity_type = 1
+
+[node name="HealingActionDisplay" parent="HUD/BattleActionsDisplay/EnemyBattleActions/HBoxContainer" index="3"]
+entity_type = 1
+
 [node name="HealthBarsDisplay" parent="HUD" instance=ExtResource( 2 )]
+
+[node name="TextureProgress" parent="HUD/HealthBarsDisplay/EnemyHealthBar" index="0"]
+margin_left = -260.0
+margin_right = -140.0
+max_value = 25.0
+value = 25.0
+fill_mode = 1
 
 [node name="WinLoosePopup" parent="HUD" instance=ExtResource( 5 )]
 visible = false
@@ -70,7 +94,23 @@ position = Vector2( 87.315, 218.417 )
 [node name="DiceController" parent="." instance=ExtResource( 7 )]
 
 [connection signal="button_down" from="HUD/BattleControlButtons/ActionButtonsBackground/HBoxContainer/RollButton" to="TurnManager" method="_on_RollButton_button_down"]
+[connection signal="button_down" from="HUD/BattleControlButtons/ActionButtonsBackground/HBoxContainer/FightButton" to="TurnManager" method="_on_FightButton_button_down"]
 
 [editable path="HUD/BattleControlButtons"]
+[editable path="HUD/BattleActionsDisplay"]
+[editable path="HUD/BattleActionsDisplay/PlayerBattleActions/HBoxContainer/HealingActionDisplay"]
+[editable path="HUD/BattleActionsDisplay/PlayerBattleActions/HBoxContainer/HealingActionDisplay/VBoxContainer/BattleActionIconController"]
+[editable path="HUD/BattleActionsDisplay/PlayerBattleActions/HBoxContainer/BlockingBattleDisplay"]
+[editable path="HUD/BattleActionsDisplay/PlayerBattleActions/HBoxContainer/BlockingBattleDisplay/VBoxContainer/BattleActionIconController"]
+[editable path="HUD/BattleActionsDisplay/PlayerBattleActions/HBoxContainer/AttackingBattleDisplay"]
+[editable path="HUD/BattleActionsDisplay/PlayerBattleActions/HBoxContainer/AttackingBattleDisplay/VBoxContainer/BattleActionIconController"]
+[editable path="HUD/BattleActionsDisplay/EnemyBattleActions/HBoxContainer/AttackingActionDisplay"]
+[editable path="HUD/BattleActionsDisplay/EnemyBattleActions/HBoxContainer/AttackingActionDisplay/VBoxContainer/BattleActionIconController"]
+[editable path="HUD/BattleActionsDisplay/EnemyBattleActions/HBoxContainer/BlockingActionDisplay"]
+[editable path="HUD/BattleActionsDisplay/EnemyBattleActions/HBoxContainer/BlockingActionDisplay/VBoxContainer/BattleActionIconController"]
+[editable path="HUD/BattleActionsDisplay/EnemyBattleActions/HBoxContainer/HealingActionDisplay"]
+[editable path="HUD/BattleActionsDisplay/EnemyBattleActions/HBoxContainer/HealingActionDisplay/VBoxContainer/BattleActionIconController"]
 [editable path="HUD/HealthBarsDisplay"]
+[editable path="HUD/HealthBarsDisplay/PlayerHealthBar"]
+[editable path="HUD/HealthBarsDisplay/EnemyHealthBar"]
 [editable path="EntityAnimators/PlayerAnimator"]

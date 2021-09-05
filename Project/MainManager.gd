@@ -6,7 +6,7 @@ const MainMenu = preload("res://Project/MainMenu.tscn")
 var game 
 var main_menu 
 
-func _ready():
+func _ready() -> void:
 	load_main_menu()
 
 func load_main_menu() -> void:
@@ -22,5 +22,5 @@ func load_game() -> void:
 	game = Game.instance()
 	add_child(game)
 
-func on_start_button_pressed():
+func on_start_button_pressed() -> void:
 	load_game()
